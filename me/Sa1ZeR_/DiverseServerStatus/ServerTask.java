@@ -1,5 +1,7 @@
 package me.Sa1ZeR_.DiverseServerStatus;
 
+import org.bukkit.Bukkit;
+
 import static org.bukkit.Bukkit.getLogger;
 
 public class ServerTask implements Runnable {
@@ -12,11 +14,16 @@ public class ServerTask implements Runnable {
         ServerStatus.instance.getStatus().updateGcTotal();
         ServerStatus.instance.getStatus().updateTpc();
         ServerStatus.instance.getStatus().updateUptime();
-        if(ServerStatus.instance.getStorageManager().isCreate()) {
-            ServerStatus.instance.getStorageManager().saveData(ServerStatus.instance.getStatus());
-        } else {
-            ServerStatus.instance.getStorageManager().createServerData(ServerStatus.instance.getStatus());
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(ServerStatus.instance, new Runnable() {
+            @Override
+            public void run() {
+                if (ServerStatus.instance.getStorageManager().isCreate()) {
+                    ServerStatus.instance.getStorageManager().saveData(ServerStatus.instance.getStatus());
+                } else {
+                    ServerStatus.instance.getStorageManager().createServerData(ServerStatus.instance.getStatus());
+                }
+            }
+        });
         if(ServerStatus.instance.getCfg().getBoolean("logger")) {
             getLogger().info("Enable server: " + String.valueOf(ServerStatus.instance.getStatus().isEnableServer()));
             getLogger().info("Chunks: " + String.valueOf(ServerStatus.instance.getStatus().getChunkCount()));
