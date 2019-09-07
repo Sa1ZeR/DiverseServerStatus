@@ -1,0 +1,20 @@
+mysql:
+  host: 'localhost:3306'
+  user: root
+  password: 123456
+  database: root
+
+#serverName
+serverName: server1
+#Time in seconds
+updateTime: 300
+#Logging to Console
+logger: true
+
+
+
+
+messages:
+  noArgs: '&4Недостаточно аргументов!'
+  noPerm: '&4Недостаточно прав!'
+  reload: '&aПлагин перезагружен'

@@ -1,0 +1,6 @@
+name: DiverseServerStatus
+main: me.Sa1ZeR_.DiverseServerStatus.ServerStatus
+author: Sa1ZeR_
+version: 1.0
+commands:
+  serverstatus:
